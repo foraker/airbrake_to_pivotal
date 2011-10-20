@@ -11,7 +11,8 @@ class AirbrakeToPivotal < Sinatra::Base
   )
 
   $pivotal = Pivotal.new(
-    ENV["AIRBRAKE_REQUESTOR"]
+    ENV["AIRBRAKE_REQUESTOR"],
+    true
   )
 
   use Rack::Auth::Basic do |username, password|

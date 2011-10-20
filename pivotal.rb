@@ -4,8 +4,8 @@ class Pivotal
 
   attr_reader :requestor
 
-  def initialize(requestor)
-    @requestor = requestor
+  def initialize(requestor, production_errors_only = false)
+    @requestor, @production_errors_only = requestor, production_errors_only
   end
 
   def bugs_to_xml(bugs)
@@ -17,6 +17,8 @@ class Pivotal
 
     xml.external_stories(:type => "array") do
       bugs.each do |bug|
+        next if should_skip?(bug)
+
         description = <<-EOF
 File: #{bug["file"]}
 Line number: #{bug["line_number"]}
@@ -40,6 +42,16 @@ EOF
     end
 
     buffer
+  end
+
+  private
+
+  def should_skip?(bug)
+    return true if production_errors_only? && bug["rails_env"] != 'production'
+    return false
+  end
+
+  def production_errors_only?
   end
 
 end
