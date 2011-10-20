@@ -20,12 +20,12 @@ class Pivotal
         next if should_skip?(bug)
 
         description = <<-EOF
+Project: #{project_name_from_bug(bug)}
 File: #{bug["file"]}
 Line number: #{bug["line_number"]}
 Controller: #{bug["controller"]}
 Action: #{bug["action"]}
 Environment: #{bug["rails_env"]}
-Error setting: #{production_errors_only?.to_s}
 
 #{bug["error_message"]}
 EOF
@@ -54,6 +54,29 @@ EOF
 
   def production_errors_only?
     @production_errors_only
+  end
+
+  def project_name_from_bug(bug)
+    project_id = bug['project_id'].to_i
+
+    case project_id
+    when 16134
+      '635 Secure Parking'
+    when 19627
+      'Breastcancer.org Community'
+    when 47801
+      'Bull Publishing'
+    when 20737
+      'Cancer and Careers'
+    when 42945
+      'eLapse'
+    when 16034
+      'Interport'
+    when 20838
+      'NICA Pitzone'
+    else
+      'Unknown'
+    end
   end
 
 end
