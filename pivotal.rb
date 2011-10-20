@@ -52,6 +52,7 @@ EOF
   end
 
   def production_errors_only?
+    @production_errors_only
   end
 
 end
