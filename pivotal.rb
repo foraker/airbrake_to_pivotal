@@ -24,7 +24,8 @@ File: #{bug["file"]}
 Line number: #{bug["line_number"]}
 Controller: #{bug["controller"]}
 Action: #{bug["action"]}
-Environment: #{bug["rails_env"]} #{production_errors_only?}
+Environment: #{bug["rails_env"]}
+Error setting: #{production_errors_only?.to_s}
 
 #{bug["error_message"]}
 EOF
