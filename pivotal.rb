@@ -35,7 +35,7 @@ EOF
           xml.name bug["error_class"]
           xml.description description
           xml.requested_by requestor
-          xml.created_at({ :type => "datetime" }, bug["created_at"])
+          xml.created_at({ :type => "datetime" }, bug["updated_at"])
           xml.story_type "bug"
           xml.estimate nil
         end
